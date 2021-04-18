@@ -7,16 +7,11 @@
       :max-height="maxH"
       :min-width="minW"
       :min-height="minH"
-      :width="width"
-      :height="height"
-      :left="left"
-      :top="top"
-      @mount="eHandler"
-      @resize:move="eHandler"
-      @resize:start="eHandler"
+      :width="sticker.width"
+      :height="sticker.height"
+      :left="sticker.x"
+      :top="sticker.y"
       @resize:end="editSizeAndPozishionSticker"
-      @drag:move="eHandler"
-      @drag:start="eHandler"
       @drag:end="editSizeAndPozishionSticker">
     <ui-icon class="delete-icon" style="color:red" @click="deleteClick(sticker.id)">delete_forever</ui-icon>
     <div :class="'sticker-box drag-el '+sticker.color" @dblclick="clickSticker(sticker.id)">
@@ -36,19 +31,11 @@ export default{
     sticker: Object,
     deleteClick: Function,
     clickSticker: Function,
-    socket: Object
+    socket: Object,
   },
   data() {
-    const tW = this.sticker.width;
-    const tH = this.sticker.height;
-    const left = this.sticker.x;
-    const top = this.sticker.y;
     return {
       handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      left: `${left}px`,
-      top: `${top}px`,
-      height: tH,
-      width: tW,
       maxW: 250,
       maxH: 250,
       minW: 100,
@@ -59,13 +46,13 @@ export default{
     };
   },
   methods: {
-    eHandler(data) {
-      this.width = data.width;
-      this.height = data.height;
-      this.left = data.left;
-      this.top = data.top;
-      this.event = data.eventName;
-    },
+    // eHandler(data) {
+    //   this.width = data.width;
+    //   this.height = data.height;
+    //   this.left = data.left;
+    //   this.top = data.top;
+    //   this.event = data.eventName;
+    // },
     editSizeAndPozishionSticker(data){
       let editStic = {
         Id: this.sticker.id,
@@ -77,7 +64,6 @@ export default{
         Color: this.sticker.color
       }
       this.socket.invoke('EditSticker', {group: 'todolist', model: editStic})
-      this.eHandler(data)
     }
   },
 }

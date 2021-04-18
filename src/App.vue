@@ -10,6 +10,7 @@
       :clickSticker="editStickerDialog"
       :deleteClick="deleteSticker"
       :socket="socket"
+      :w="stic.width" :h="stic.height" :tw="stic.x" :th="stic.y"
     />
 
     <ui-dialog style="z-index:100" v-model="open" @confirm="onConfirm" closable>
@@ -78,15 +79,15 @@ export default {
         this.setStickers( message);
       }.bind(this)),
       this.socket.on("DeleteSticker", function (message) {
-        console.log({ message });
+        console.log("DeleteSticker" + { message });
         this.setStickers( message);
       }.bind(this)),
       this.socket.on("AddStickerSuccess", function (message) {
-        console.log({ message });
+        console.log("AddStickerSuccess"+ { message });
         this.setStickers( message);
       }.bind(this)),
       this.socket.on("EditStickerSuccess", function (message) {
-        console.log({ message });
+        console.log("EditStickerSuccess" + { message });
         this.setStickers( message);
       }.bind(this))
     });
