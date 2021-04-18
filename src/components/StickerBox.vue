@@ -1,5 +1,5 @@
 <template>
-  <vue-resizable
+  <vue-resizable style="position: absolute"
     :dragSelector="dragSelector"
       :active="handlers"
       :fit-parent="fit"
