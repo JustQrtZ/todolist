@@ -1,5 +1,5 @@
 <template>
-  <div class="app" @click="openDialog">
+  <div class="app" @click="openDialog" @dragover.prevent @drop="dragImg">
     <span class="app" v-if="stickers.length < 1">Add new sticker</span>
     <sticker-box
       v-else
@@ -103,6 +103,11 @@ export default {
       if (event.target.classList.contains('app')) {
         this.open = true;
       }
+    },
+    dragImg(e){
+      e.stopPropagation();
+      e.preventDefault();
+      // let files = e.dataTransfer.files;
     },
     createNewSticker() {
       let newSticker = {
