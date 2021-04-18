@@ -15,7 +15,8 @@
       @drag:end="editSizeAndPozishionSticker">
     <ui-icon class="delete-icon" style="color:red" @click="deleteClick(sticker.id)">delete_forever</ui-icon>
     <div :class="'sticker-box drag-el '+sticker.color" @dblclick="clickSticker(sticker.id)">
-      {{sticker.content}}
+      <span v-if="sticker.content">{{sticker.content}}</span>
+      <img v-else src="sticker.url"/>
     </div>
   </vue-resizable>
 </template>
@@ -46,13 +47,6 @@ export default{
     };
   },
   methods: {
-    // eHandler(data) {
-    //   this.width = data.width;
-    //   this.height = data.height;
-    //   this.left = data.left;
-    //   this.top = data.top;
-    //   this.event = data.eventName;
-    // },
     editSizeAndPozishionSticker(data){
       let editStic = {
         Id: this.sticker.id,
@@ -98,4 +92,9 @@ export default{
 .pink{
   background-color: pink;
 }
+.sticker-box img{
+  width: 100%;
+  height: 100%;
+}
+
 </style>
