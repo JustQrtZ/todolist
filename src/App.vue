@@ -44,7 +44,8 @@
 <script>
 import StickerBox from "./components/StickerBox.vue";
 import * as SignalR from "@microsoft/signalr";
-import axios from "axios";
+import JQuery from 'jquery'
+let $ = JQuery
 
 export default {
 	name: "App",
@@ -117,35 +118,36 @@ export default {
 				this.open = true;
 			}
 		},
+    isInArray(Url){
+      return this.stickers.find(item => item.url == Url)
+    },
+
 		dragImg(e) {
+      if (this.isInArray(e.dataTransfer.getData("URL")))
+      {
+        return
+      }
 			e.stopPropagation();
 			e.preventDefault();
-
-			axios({
-				method: "post",
-				mode: "no-cors",
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-					"Content-Type": "application/json",
-				},
+			$.ajax({
+				type: "POST",
 				url: "https://api.imgbb.com/1/upload",
 				data: {
 					key: "1a9908a71a7b2fd666e90eaf49a403e5",
 					image: e.dataTransfer.getData("URL"),
-					name: ``,
 				},
+        success: function(response){
+          console.log(response.data.image.url);
+          this.createNewStickerImage(response.data.image.url);
+        }.bind(this),
 			})
-				.then((respoce) => {
-					console.log(respoce.data.image.url);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
 		},
+
 		createNewStickerImage(image) {
 			let newSticker = {
 				Id: "dsgsfag",
-				url: image,
+				Url: image,
+        Content: "",
 				Color: this.colors[0],
 				Width: 150,
 				Height: 150,
@@ -200,6 +202,7 @@ export default {
 				Y: this.stickers[index].y,
 				Width: this.stickers[index].width,
 				Height: this.stickers[index].height,
+        Url: this.stickers[index].url || null 
 			};
 			this.$refs.id.innerText = "";
 			this.$refs.content.inputValue = "";
