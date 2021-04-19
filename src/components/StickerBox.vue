@@ -80,45 +80,47 @@ export default {
 </script>
 
 <style>
-.delete-icon{
-  position: absolute;
-  right: 0px;
-  top: 10px;
-  z-index: 1;
+.delete-icon {
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	z-index: 1;
+	cursor: pointer;
 }
-.resizable-component[data-v-7a68f144]{
-  position: absolute
+.resizable-component[data-v-7a68f144] {
+	position: absolute;
 }
-.sticker-box{
-  position: absolute;
-  border: 1px solid #000000;
-  margin: 10px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.white{
-  background-color: white;
-}
-.aqua{
-  background-color: aqua;
-}
-.yellow{
-  background-color: yellow;
-}
-.pink{
-  background-color: pink;
-}
-.sticker-box img{
-  width: 100%;
-  height: 100%;
-}
-.imagediv {
-  width: 80%; 
-  height: 80%; 
-  margin: 10% auto
+.sticker-box {
+	position: absolute;
+	border: 1px solid #000000;
+	border-radius: 14px;
+	margin: 10px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
+.aqua {
+	background-color: aqua;
+	border-color: aqua;
+}
+.yellow {
+	background-color: yellow;
+	border-color: yellow;
+}
+.pink {
+	background-color: pink;
+	border-color: pink;
+}
+.sticker-box img {
+	width: 100%;
+	height: 100%;
+}
+.imagediv {
+	width: 80%;
+	height: 80%;
+	margin: 10% auto;
+}
 </style>
